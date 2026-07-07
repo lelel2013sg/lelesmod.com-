@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600;700&family=Inter:wght@300;400;500&display=swap');
+:root{--bg:#0a0a0f;--surface:#111118;--card:#16161f;--border:#2a2a3a;--accent:#ff3c3c;--accent2:#ff7a00;--text:#e8e8f0;--muted:#7070a0;--green:#00e676;--blue:#4488ff;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;}
+nav{display:flex;align-items:center;justify-content:space-between;padding:0 32px;height:60px;background:rgba(10,10,15,0.98);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100;}
+.logo{font-family:'Rajdhani',sans-serif;font-size:22px;font-weight:700;letter-spacing:3px;}
+.logo span{color:var(--accent);}
+.nav-links{display:flex;gap:24px;}
+.nav-links a{color:var(--muted);text-decoration:none;font-size:13px;font-weight:500;}
+.nav-links a:hover{color:var(--text);}
+.hero{padding:70px 32px 50px;text-align:center;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;top:-60px;left:50%;transform:translateX(-50%);width:600px;height:400px;background:radial-gradient(ellipse,rgba(255,60,60,0.10) 0%,transparent 70%);pointer-events:none;}
+.hero-tag{display:inline-block;background:rgba(255,60,60,0.10);border:1px solid rgba(255,60,60,0.3);color:var(--accent);font-size:10px;font-weight:600;letter-spacing:3px;text-transform:uppercase;padding:5px 14px;border-radius:2px;margin-bottom:20px;}
+.hero h1{font-family:'Rajdhani',sans-serif;font-size:clamp(48px,8vw,96px);font-weight:700;line-height:0.9;margin-bottom:18px;}
+.hero h1 .red{color:var(--accent);}
+.hero p{font-size:15px;color:var(--muted);max-width:440px;margin:0 auto;line-height:1.7;}
+.hero-stats{display:flex;justify-content:center;gap:48px;margin-top:44px;padding-top:40px;border-top:1px solid var(--border);}
+.stat-num{font-family:'Rajdhani',sans-serif;font-size:36px;font-weight:700;}
+.stat-num span{color:var(--accent);}
+.stat-label{font-size:11px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;margin-top:4px;}
+.section{padding:16px 32px 60px;max-width:1200px;margin:0 auto;}
+.section-header{display:flex;align-items:baseline;gap:12px;margin-bottom:28px;}
+.section-header h2{font-family:'Rajdhani',sans-serif;font-size:26px;font-weight:700;letter-spacing:1px;}
+.section-header .count{font-size:12px;color:var(--muted);}
+.mods-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px;}
+.mod-card{background:var(--card);border:1px solid var(--border);border-radius:4px;overflow:hidden;transition:border-color 0.2s,transform 0.2s;cursor:pointer;}
+.mod-card:hover{border-color:var(--accent);transform:translateY(-2px);}
+.mod-card.featured{border-color:rgba(255,60,60,0.4);}
+.mod-banner{height:100px;display:flex;align-items:center;justify-content:center;font-size:40px;position:relative;}
+.mod-banner::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,transparent 40%,var(--card));}
+.b1{background:linear-gradient(135deg,#1a0a0a,#3a0a0a);}
+.b2{background:linear-gradient(135deg,#0a1a1a,#0a2a3a);}
+.b3{background:linear-gradient(135deg,#1a1a0a,#3a2a0a);}
+.b4{background:linear-gradient(135deg,#0a0a2a,#0a1a4a);}
+.b5{background:linear-gradient(135deg,#1a1a0a,#2a1a0a);}
+.b6{background:linear-gradient(135deg,#2a0a1a,#3a0a2a);}
+.b7{background:linear-gradient(135deg,#0a1a0a,#1a3a0a);}
+.b8{background:linear-gradient(135deg,#2a1a0a,#3a2a0a);}
+.b9{background:linear-gradient(135deg,#1a0a2a,#2a0a3a);}
+.b10{background:linear-gradient(135deg,#0a1a2a,#0a2a3a);}
+.b11{background:linear-gradient(135deg,#2a0a0a,#4a0a0a);}
+.b12{background:linear-gradient(135deg,#0a2a0a,#0a3a1a);}
+.mod-body{padding:16px;}
+.mod-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:7px;}
+.mod-title{font-family:'Rajdhani',sans-serif;font-size:17px;font-weight:700;}
+.badge{font-size:9px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;padding:2px 7px;border-radius:2px;white-space:nowrap;}
+.badge-new{background:rgba(255,60,60,0.12);color:var(--accent);border:1px solid rgba(255,60,60,0.3);}
+.badge-hot{background:rgba(255,122,0,0.12);color:var(--accent2);border:1px solid rgba(255,122,0,0.3);}
+.badge-free{background:rgba(0,230,118,0.08);color:var(--green);border:1px solid rgba(0,230,118,0.2);}
+.mod-desc{font-size:12px;color:var(--muted);line-height:1.6;margin-bottom:12px;}
+.mod-req{background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:3px;padding:8px 10px;margin-bottom:12px;}
+.req-label{font-size:9px;color:var(--muted);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:5px;}
+.req-tags{display:flex;flex-wrap:wrap;gap:4px;}
+.req-tag{font-size:10px;background:rgba(255,255,255,0.05);border:1px solid var(--border);padding:1px 7px;border-radius:2px;}
+.tag-shv{border-color:rgba(255,122,0,0.4);color:var(--accent2);}
+.tag-shvdn{border-color:rgba(255,60,60,0.4);color:var(--accent);}
+.tag-nui{border-color:rgba(68,136,255,0.4);color:var(--blue);}
+.mod-footer{display:flex;align-items:center;justify-content:space-between;}
+.key-combo{display:flex;gap:3px;align-items:center;flex-wrap:wrap;}
+.key{background:var(--surface);border:1px solid var(--border);border-bottom:3px solid var(--border);border-radius:3px;padding:2px 6px;font-size:10px;font-weight:600;color:var(--text);}
+.key-sep{font-size:9px;color:var(--muted);}
+.btn-dl{display:inline-flex;align-items:center;gap:5px;background:var(--accent);color:white;padding:6px 13px;border-radius:3px;font-size:11px;font-weight:600;text-decoration:none;border:none;cursor:pointer;transition:background 0.2s;}
+.btn-dl:hover{background:#ff5555;}
+.install-section{background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:60px 32px;}
+.install-inner{max-width:900px;margin:0 auto;}
+.install-inner h2{font-family:'Rajdhani',sans-serif;font-size:26px;font-weight:700;margin-bottom:32px;}
+.steps{display:grid;grid-template-columns:1fr 1fr;gap:24px;}
+.step{display:flex;gap:14px;}
+.step-n{font-family:'Rajdhani',sans-serif;font-size:48px;font-weight:700;color:var(--border);line-height:1;flex-shrink:0;width:48px;}
+.step h3{font-family:'Rajdhani',sans-serif;font-size:16px;font-weight:700;margin-bottom:5px;}
+.step p{font-size:12px;color:var(--muted);line-height:1.65;}
+.step code{font-size:10px;background:rgba(255,255,255,0.05);border:1px solid var(--border);padding:1px 5px;border-radius:2px;color:var(--accent2);font-family:monospace;}
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.88);z-index:1000;align-items:center;justify-content:center;backdrop-filter:blur(5px);}
+.modal-overlay.open{display:flex;}
+.modal{background:var(--card);border:1px solid var(--border);border-radius:6px;width:90%;max-width:540px;max-height:88vh;overflow-y:auto;padding:28px;position:relative;}
+.modal-x{position:absolute;top:12px;right:12px;background:none;border:none;color:var(--muted);font-size:20px;cursor:pointer;line-height:1;}
+.modal-x:hover{color:var(--text);}
+.modal h2{font-family:'Rajdhani',sans-serif;font-size:26px;font-weight:700;margin-bottom:5px;}
+.modal-sub{font-size:10px;color:var(--muted);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:16px;display:block;}
+.modal-desc{font-size:13px;color:var(--muted);line-height:1.7;margin-bottom:18px;}
+.modal-feat h3{font-family:'Rajdhani',sans-serif;font-size:13px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin-bottom:9px;}
+.feat-list{list-style:none;margin-bottom:18px;}
+.feat-list li{font-size:12px;padding:5px 0;border-bottom:1px solid var(--border);display:flex;gap:9px;}
+.feat-list li::before{content:'▸';color:var(--accent);flex-shrink:0;}
+.modal-req-box{background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:3px;padding:12px;margin-bottom:18px;}
+.modal-req-box h3{font-family:'Rajdhani',sans-serif;font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin-bottom:7px;}
+.modal-req-box p{font-size:12px;line-height:1.6;}
+.modal-bottom{display:flex;align-items:center;justify-content:space-between;padding-top:16px;border-top:1px solid var(--border);}
+.key-info{font-size:11px;color:var(--muted);}
+.key-info strong{color:var(--text);}
+footer{padding:32px;text-align:center;color:var(--muted);font-size:12px;border-top:1px solid var(--border);}
+footer strong{color:var(--text);}
+@media(max-width:600px){.steps{grid-template-columns:1fr;}.hero-stats{gap:20px;}}
+</style>
+</head>
+<body>
+<nav>
+  <div class="logo">LELE<span>MODS</span>.COM</div>
+  <div class="nav-links"><a href="#mods">Mods</a><a href="#install">Installation</a></div>
+</nav>
+
+<section class="hero">
+  <div class="hero-tag">GTA V — Nur Story Mode</div>
+  <h1>LELE<span class="red">MODS</span></h1>
+  <p>Handgemachte GTA V Script-Mods. Kostenlos. Einfach in den scripts-Ordner legen und spielen.</p>
+  <div class="hero-stats">
+    <div><div class="stat-num">12<span>+</span></div><div class="stat-label">Mods</div></div>
+    <div><div class="stat-num">100<span>%</span></div><div class="stat-label">Kostenlos</div></div>
+    <div><div class="stat-num">0<span>€</span></div><div class="stat-label">Für immer</div></div>
+  </div>
+</section>
+
+<section class="section" id="mods">
+  <div class="section-header"><h2>ALLE MODS</h2><span class="count">12 Mods — alle kostenlos</span></div>
+  <div class="mods-grid">
+    <div class="mod-card featured" onclick="om(0)"><div class="mod-banner b1">🚔</div><div class="mod-body"><div class="mod-top"><div class="mod-title">Leles Begleiter-Mod</div><span class="badge badge-new">NEU</span></div><div class="mod-desc">Spawne unbegrenzte Begleiter – Polizei, SWAT, FIB, Gangs, Story-Charaktere. Karten-Blips, Gottmodus, Waffen, Fahrzeug-Sync, Waypoint-Einsätze.</div><div class="mod-req"><div class="req-label">Benötigt</div><div class="req-tags"><span class="req-tag tag-shv">Script Hook V</span><span class="req-tag tag-shvdn">SHVDN3</span><span class="req-tag tag-nui">NativeUI</span></div></div><div class="mod-footer"><div class="key-combo"><span class="key">L1</span><span class="key-sep">+</span><span class="key">R1</span></div><button class="btn-dl" onclick="event.stopPropagation()">⬇ Download</button></div></div></div>
+    <div class="mod-card" onclick="om(1)"><div class="mod-banner b2">🚗</div><div class="mod-body"><div class="mod-top"><div class="mod-title">Modern Cars</div><span class="badge badge-hot">HOT</span></div><div class="mod-desc">8 fiktive Superautos mit Boost, Sprung, kugelsicheren Reifen. Phantom X-9, Volta Zenith, Aegis Titan und mehr.</div><div class="mod-req"><div class="req-label">Benötigt</div><div class="req-tags"><span class="req-tag tag-shv">Script Hook V</span><span class="req-tag tag-shvdn">SHVDN3</span><span class="req-tag tag-nui">NativeUI</span></div></div><div class="mod-footer"><div class="key-combo"><span class="key">F7</span></div><button class="btn-dl" onclick="event.stopPropagation()">⬇ Download</button></div></div></div>
+    <div class="mod-card" onclick="om(2)"><div class="mod-banner b3">🏢</div><div class="mod-body"><div class="mod-top"><div class="mod-title">Interior Explorer</div><span class="badge badge-new">NEU</span></div><div class="mod-desc">Betrete alle versteckten Innenräume: Restaurants, Clubs, Polizeistationen, Banken, Gangster-Stützpunkte.</div><div class="mod-req"><div class="req-label">Benötigt</div><div class="req-tags"><span class="req-tag tag-shv">Script Hook V</span><span class="req-tag tag-shvdn">SHVDN3</span><span class="req-tag tag-nui">NativeUI</span></div></div><div class="mod-footer"><div class="key-combo"><span class="key">F8</span></div><button class="btn-dl" onclick="event.stopPropagation()">⬇ Download</button></div></div></div>
+    <div class="mod-card" onclick="om(3)"><div class="mod-banner b4">🏦</div><div class="mod-body"><div class="mod-top"><div class="mod-title">Heist Planner</div><span class="badge badge-hot">HOT</span></div><div class="mod-desc">Plane Banküberfälle, stelle eine Crew zusammen, kassiere die Beute und entkampe der Polizei.</div><div class="mod-req"><div class="req-label">Benötigt</div><div class="req-tags"><span class="req-tag tag-shv">Script Hook V</span><span class="req-tag tag-shvdn">SHVDN3</span><span class="req-tag tag-nui">NativeUI</span></div></div><div class="mod-footer"><div class="key-combo"><span class="key">F9</span></div><button class="btn-dl" onclick="event.stopPropagation()">⬇ Download</button></div></div></div>
+    <div class="mod-card" onclick="om(4)"><div class="mod-banner b5">🌩</div><div class="mod-body"><div class="mod-top"><div class="mod-title">Wetter & Zeit</div><span class="badge badge-free">FREE</span></div><div class="mod-desc">12 Wetter-Typen, freie Uhrzeitkontrolle und Zeit einfrieren.</div><div class="mod-req"><div class="req-label">Benötigt</div><div class="req-tags"><span class="req-tag tag-shv">Script Hook V</span><span class="req-tag tag-shvdn">SHVDN3</span><span class="req-tag tag-nui">NativeUI</span></div></div><div class="mod-footer"><div class="key-combo"><span class="key">F10</span></div><button class="btn-dl" onclick="event.stopPropagation()">⬇ Download</button></div></div></div>
+    <div class="mod-card" onclick="om(5)"><div class="mod-banner b6">⭐</div><div class="mod-body"><div class="mod-top"><div class="mod-title">Wanted Kontrolle</div><span class="badge badge-free">FREE</span></div><div class="mod-desc">Wanted Level 0–5 Sterne, Never-Wanted-Modus, sofortiges Löschen.</div><div class="mod-req"><div class="req-label">Benötigt</div><div class="req-tags"><span class="req-tag tag-shv">Script Hook V</span><span class="req-tag tag-shvdn">SHVDN3</span><span class="req-tag tag-nui">NativeUI</span></div></div><div class="mod-footer"><div class="key-combo"><span class="key">F11</span></div><button class="btn-dl" onclick="event.stopPropagation()">⬇ Download</button></div></div></div>
+    <div class="mod-card" onclick="om(6)"><div class="mod-banner b7">🔫</div><div class="mod-body"><div class="mod-top"><div class="mod-title">Waffen Arsenal</div><span class="badge badge-hot">HOT</span></div><div class="mod-desc">Alle Waffen, unendliche Munition, kein Rückstoß. Von Pistole bis Minigun und RPG.</div><div class="mod-req"><div class="req-label">Benötigt</div><div class="req-tags"><span class="req-tag tag-shv">Script Hook V</span><span class="req-tag tag-shvdn">SHVDN3</span><span class="req-tag tag-nui">NativeUI</span></div></div><div class="mod-footer"><div class="key-combo"><span class="key">F12</span></div><button class="btn-dl" onclick="event.stopPropagation()">⬇ Download</button></div></div></div>
+    <div class="mod-card" onclick="om(7)"><div class="mod-banner b8">💨</div><div class="mod-body"><div class="mod-top"><div class="mod-title">Super Speed</div><span class="badge badge-free">FREE</span></div><div class="mod-desc">Bis zu 10x Laufgeschwindigkeit, Fahrzeug-Boost und maximale Fahrzeuggeschwindigkeit.</div><div class="mod-req"><div class="req-label">Benötigt</div><div class="req-tags"><span class="req-tag tag-shv">Script Hook V</span><span class="req-tag tag-shvdn">SHVDN3</span><span class="req-tag tag-nui">NativeUI</span></div></div><div class="mod-footer"><div class="key-combo"><span class="key">Strg</span><span class="key-sep">+</span><span class="key">S</span></div><button class="btn-dl" onclick="event.stopPropagation()">⬇ Download</button></div></div></div>
+    <div class="mod-card" onclick="om(8)"><div class="mod-banner b9">🧟</div><div class="mod-body"><div class="mod-top"><div class="mod-title">Zombie Apokalypse</div><span class="badge badge-hot">HOT</span></div><div class="mod-desc">Zombies spawnen um dich herum. 4 Schwierigkeitsstufen bis zu 80 gleichzeitigen Zombies.</div><div class="mod-req"><div class="req-label">Benötigt</div><div class="req-tags"><span class="req-tag tag-shv">Script Hook V</span><span class="req-tag tag-shvdn">SHVDN3</span><span class="req-tag tag-nui">NativeUI</span></div></div><div class="mod-footer"><div class="key-combo"><span class="key">Strg</span><span class="key-sep">+</span><span class="key">Z</span></div><button class="btn-dl" onclick="event.stopPropagation()">⬇ Download</button></div></div></div>
+    <div class="mod-card" onclick="om(9)"><div class="mod-banner b10">👻</div><div class="mod-body"><div class="mod-top"><div class="mod-title">NoClip & Fliegen</div><span class="badge badge-free">FREE</span></div><div class="mod-desc">Durch Wände fliegen, Kollision aus, Fluggeschwindigkeit 1x–10x einstellbar.</div><div class="mod-req"><div class="req-label">Benötigt</div><div class="req-tags"><span class="req-tag tag-shv">Script Hook V</span><span class="req-tag tag-shvdn">SHVDN3</span><span class="req-tag tag-nui">NativeUI</span></div></div><div class="mod-footer"><div class="key-combo"><span class="key">Strg</span><span class="key-sep">+</span><span class="key">N</span></div><button class="btn-dl" onclick="event.stopPropagation()">⬇ Download</button></div></div></div>
+    <div class="mod-card" onclick="om(10)"><div class="mod-banner b11">🌀</div><div class="mod-body"><div class="mod-top"><div class="mod-title">Teleport Manager</div><span class="badge badge-free">FREE</span></div><div class="mod-desc">Zum Wegpunkt, 8 bekannte Orte oder eigene gespeicherte Orte teleportieren.</div><div class="mod-req"><div class="req-label">Benötigt</div><div class="req-tags"><span class="req-tag tag-shv">Script Hook V</span><span class="req-tag tag-shvdn">SHVDN3</span><span class="req-tag tag-nui">NativeUI</span></div></div><div class="mod-footer"><div class="key-combo"><span class="key">Strg</span><span class="key-sep">+</span><span class="key">T</span></div><button class="btn-dl" onclick="event.stopPropagation()">⬇ Download</button></div></div></div>
+    <div class="mod-card" onclick="om(11)"><div class="mod-banner b12">💰</div><div class="mod-body"><div class="mod-top"><div class="mod-title">Geld & Stats</div><span class="badge badge-free">FREE</span></div><div class="mod-desc">Geld hinzufügen ($10k–$1M), Gottmodus, Leben auffüllen, Super-Sprung.</div><div class="mod-req"><div class="req-label">Benötigt</div><div class="req-tags"><span class="req-tag tag-shv">Script Hook V</span><span class="req-tag tag-shvdn">SHVDN3</span><span class="req-tag tag-nui">NativeUI</span></div></div><div class="mod-footer"><div class="key-combo"><span class="key">Strg</span><span class="key-sep">+</span><span class="key">M</span></div><button class="btn-dl" onclick="event.stopPropagation()">⬇ Download</button></div></div></div>
+  </div>
+</section>
+
+<section class="install-section" id="install">
+  <div class="install-inner">
+    <h2>INSTALLATION</h2>
+    <div class="steps">
+      <div class="step"><div class="step-n">1</div><div><h3>Script Hook V</h3><p>Von <code>dev-c.com/gtav/scripthookv</code> herunterladen. <code>ScriptHookV.dll</code> und <code>dinput8.dll</code> in den GTA V Hauptordner.</p></div></div>
+      <div class="step"><div class="step-n">2</div><div><h3>SHVDN Nightly</h3><p>Von GitHub herunterladen. <code>.asi</code> und beide <code>.dll</code> in den GTA V Hauptordner.</p></div></div>
+      <div class="step"><div class="step-n">3</div><div><h3>NativeUI</h3><p><code>NativeUI.dll</code> von GitHub herunterladen und in den <code>scripts</code> Ordner legen.</p></div></div>
+      <div class="step"><div class="step-n">4</div><div><h3>Mod installieren</h3><p>ZIP entpacken. Die <code>.cs</code> Datei in den <code>scripts</code> Ordner legen. GTA V starten!</p></div></div>
+    </div>
+  </div>
+</section>
+
+<footer><strong>LeleMods.com</strong> — Alle Mods nur für GTA V Story Mode. Niemals in GTA Online verwenden.</footer>
+
+<div class="modal-overlay" id="modal" onclick="cm(event)">
+  <div class="modal"><button class="modal-x" onclick="document.getElementById('modal').classList.remove('open')">✕</button><div id="mb"></div></div>
+</div>
+
+<script>
+const mods=[
+  {title:"Leles Begleiter-Mod",sub:"Begleiter · Polizei · Gang · Einsatz",desc:"Spawne unbegrenzte Begleiter aus 15 Fraktionen. Karten-Blips, Gottmodus, Waffenauswahl, Fahrzeug-Sync, Waypoint-Einsätze und automatische Verstärkung.",features:["15 Modelle: Police, Sheriff, SWAT, FIB, Gangs, Charaktere","Karten-Blips: grün/gelb/pink","Gottmodus pro Begleiter","Im Fahrzeug bleiben bis Spieler aussteigt","Gleiche Waffe & Ziel wie Spieler","Kampf am Wegpunkt starten","Verstärkung rufen","Auto-Eskalation bei Überzahl"],req:"Script Hook V + SHVDN3 Nightly + NativeUI.dll",key:"L1 + R1 halten → Menü | Viereck → Liste"},
+  {title:"Modern Cars",sub:"Superautos · Boost · Fähigkeiten",desc:"8 fiktive Superautos mit einzigartigen Fähigkeiten, voll getuned und zufälliger Farbe.",features:["Phantom X-9 – Militärtarnfahrzeug, kugelsicher","Volta Zenith – Elektro-Hypercar mit Boost","Aegis Titan – Sportwagen mit Sprung","Nova Stryker – Jetboost","Colossus Prime – gepanzerter SUV","Apex Shadow – Stealth-Sportwagen","Thunderclad V8 – Muscle-Car","Hydra Storm – Amphibienfahrzeug"],req:"Script Hook V + SHVDN3 Nightly + NativeUI.dll",key:"F7 → Menü | Strg+B Boost | Strg+J Sprung"},
+  {title:"Interior Explorer",sub:"Gebäude · Innenräume · Teleport",desc:"Betrete alle versteckten Innenräume von GTA V, die normalerweise nicht zugänglich sind.",features:["Shops: Burger Shot, 24/7, Fleeca Bank, Tattoo, Ammunation","Clubs: Bahama Mamas, Tequi-La-La, Vanilla Unicorn","Behörden: LSPD, Krankenhaus, Rathaus, FIB","Kriminell: Paleto Bank, Mazda Bank Tresor, Lost MC Clubhouse","Zurück nach draußen teleportieren"],req:"Script Hook V + SHVDN3 Nightly + NativeUI.dll",key:"F8 → Menü"},
+  {title:"Heist Planner",sub:"Bankraub · Crew · Beute",desc:"Plane und führe eigene Banküberfälle durch mit Crew-System und Polizei-Reaktion.",features:["4 Bankziele (Fleeca, Paleto Bay, Pacific Standard, Mazda)","Crew: Michael, Trevor, Franklin, Gangster, Ex-Militär","Polizei-Reaktion nach Überfall (Wanted Level 3)","Beute auf dein Story-Konto","Polizei abschütteln per Menü","Crew folgt und kämpft für dich"],req:"Script Hook V + SHVDN3 Nightly + NativeUI.dll",key:"F9 → Menü"},
+  {title:"Wetter & Zeit",sub:"Atmosphäre · Wetter · Uhrzeit",desc:"Volle Kontrolle über Wetter und Uhrzeit in Los Santos.",features:["12 Wetter-Typen (Sonnig, Regen, Gewitter, Schnee, Blizzard...)","7 Uhrzeiten wählbar","Zeit einfrieren","Sofortiger Wechsel ohne Ladezeit"],req:"Script Hook V + SHVDN3 Nightly + NativeUI.dll",key:"F10 → Menü"},
+  {title:"Wanted Kontrolle",sub:"Polizei · Sterne · Never Wanted",desc:"Volle Kontrolle über deinen Wanted Level in Echtzeit.",features:["Wanted Level 0–5 direkt setzen","Never Wanted (dauerhaft)","Sofortiges Löschen","Funktioniert nach Überfällen"],req:"Script Hook V + SHVDN3 Nightly + NativeUI.dll",key:"F11 → Menü"},
+  {title:"Waffen Arsenal",sub:"Waffen · Munition · Combat",desc:"Alle Waffen sofort, mit allem was dazugehört.",features:["Alle 15 Waffen auf einmal","Munition auffüllen","Unendlich Munition (dauerhaft)","Kein Rückstoß","Alle Waffen entfernen"],req:"Script Hook V + SHVDN3 Nightly + NativeUI.dll",key:"F12 → Menü"},
+  {title:"Super Speed",sub:"Geschwindigkeit · Boost · Sprint",desc:"Irrsinnige Geschwindigkeiten zu Fuß und im Fahrzeug.",features:["Laufgeschwindigkeit: 2x / 3x / 5x / 10x","Fahrzeug-Boost einmalig","Fahrzeug Höchstgeschwindigkeit auf Max","Ein/Ausschaltbar"],req:"Script Hook V + SHVDN3 Nightly + NativeUI.dll",key:"Strg+S → Menü"},
+  {title:"Zombie Apokalypse",sub:"Horror · Survival · Apokalypse",desc:"Los Santos verwandelt sich in eine Zombie-Apokalypse.",features:["Automatischer Zombie-Spawn","4 Schwierigkeiten: 10/20/40/80 Zombies","Eigene Beziehungsgruppe (feindlich)","Alle Zombies entfernen","Anzahl anzeigen"],req:"Script Hook V + SHVDN3 Nightly + NativeUI.dll",key:"Strg+Z → Menü"},
+  {title:"NoClip & Fliegen",sub:"NoClip · Fliegen · Kollision aus",desc:"Schalte Kollision aus und fliege durch alles hindurch.",features:["Kollision deaktivieren","Fluggeschwindigkeit 1x–10x","Normale Bewegungstasten","Sofort ein/ausschaltbar"],req:"Script Hook V + SHVDN3 Nightly + NativeUI.dll",key:"Strg+N → Menü"},
+  {title:"Teleport Manager",sub:"Teleport · Orte · Wegpunkt",desc:"Teleportiere sofort zu jedem Ort in der Map.",features:["Zum Karten-Wegpunkt","8 vordefinierte Orte","Eigene Orte speichern","Bodenprüfung vor Teleport"],req:"Script Hook V + SHVDN3 Nightly + NativeUI.dll",key:"Strg+T → Menü"},
+  {title:"Geld & Stats",sub:"Geld · Gottmodus · Fähigkeiten",desc:"Alles für einen entspannten Story Mode.",features:["Geld: $10k / $50k / $100k / $500k / $1M","Gottmodus","Leben & Rüstung auffüllen","Super-Sprung","Unendlich Atem unter Wasser"],req:"Script Hook V + SHVDN3 Nightly + NativeUI.dll",key:"Strg+M → Menü"}
+];
+function om(i){
+  const m=mods[i];
+  document.getElementById('mb').innerHTML=`<h2>${m.title}</h2><span class="modal-sub">${m.sub}</span><p class="modal-desc">${m.desc}</p><div class="modal-feat"><h3>Features</h3><ul class="feat-list">${m.features.map(f=>`<li>${f}</li>`).join('')}</ul></div><div class="modal-req-box"><h3>Benötigt</h3><p>${m.req}</p></div><div class="modal-bottom"><div class="key-info"><strong>Öffnen:</strong> ${m.key}</div><button class="btn-dl">⬇ Download</button></div>`;
+  document.getElementById('modal').classList.add('open');
+}
+function cm(e){if(e.target===document.getElementById('modal'))document.getElementById('modal').classList.remove('open');}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')document.getElementById('modal').classList.remove('open');});
+</script>
+</body>
+</html>
