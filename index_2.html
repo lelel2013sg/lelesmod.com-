@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LeleMods.com – GTA V Mods</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap');
+:root{
+  --bg:#06060e;--surface:#0c0c18;--card:#101020;--border:#1e1e35;
+  --accent:#ff2020;--accent2:#ff8800;--text:#f0f0ff;--muted:#5a5a90;
+  --green:#00e676;--blue:#4488ff;--purple:#aa44ff;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;overflow-x:hidden;}
+
+/* SCROLLBAR */
+::-webkit-scrollbar{width:6px;}
+::-webkit-scrollbar-track{background:var(--bg);}
+::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px;}
+::-webkit-scrollbar-thumb:hover{background:var(--accent);}
+
+/* NAV */
+nav{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 48px;height:68px;
+  background:rgba(6,6,14,0.97);
+  border-bottom:1px solid var(--border);
+  position:sticky;top:0;z-index:200;
+  backdrop-filter:blur(24px);
+}
+.logo{font-family:'Rajdhani',sans-serif;font-size:26px;font-weight:700;letter-spacing:4px;text-decoration:none;color:var(--text);}
+.logo span{color:var(--accent);text-shadow:0 0 24px rgba(255,32,32,0.6);}
+.nav-links{display:flex;gap:32px;align-items:center;}
+.nav-links a{color:var(--muted);text-decoration:none;font-size:13px;font-weight:500;letter-spacing:0.5px;transition:color 0.2s;}
+.nav-links a:hover{color:var(--text);}
+.nav-badge{background:var(--accent);color:white;font-size:10px;font-weight:700;padding:2px 8px;border-radius:10px;margin-left:6px;}
+
+/* HERO */
+.hero{
+  min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:80px 40px;text-align:center;position:relative;overflow:hidden;
+}
+.hero-bg{
+  position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 60% 50% at 50% 0%, rgba(255,32,32,0.08) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 30% at 20% 80%, rgba(68,136,255,0.04) 0%, transparent 50%),
+    radial-gradient(ellipse 40% 30% at 80% 80%, rgba(170,68,255,0.04) 0%, transparent 50%);
+}
+.hero-grid{
+  position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(255,32,32,0.025) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,32,32,0.025) 1px,transparent 1px);
+  background-size:48px 48px;
+  mask-image:radial-gradient(ellipse 100% 80% at 50% 0%,black 0%,transparent 70%);
+}
+.hero-content{position:relative;z-index:1;}
+.hero-tag{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(255,32,32,0.08);border:1px solid rgba(255,32,32,0.2);
+  color:var(--accent);font-size:11px;font-weight:600;letter-spacing:3px;
+  text-transform:uppercase;padding:7px 20px;border-radius:2px;margin-bottom:32px;
+}
+.hero-tag::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--accent);animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:0.3;}}
+
+.hero h1{
+  font-family:'Rajdhani',sans-serif;
+  font-size:clamp(64px,12vw,140px);
+  font-weight:700;line-height:0.85;
+  letter-spacing:-3px;margin-bottom:28px;
+}
+.hero h1 .white{color:var(--text);}
+.hero h1 .red{
+  color:var(--accent);
+  text-shadow:0 0 60px rgba(255,32,32,0.5),0 0 120px rgba(255,32,32,0.2);
+}
+.hero-desc{
+  font-size:16px;color:var(--muted);max-width:560px;
+  margin:0 auto 40px;line-height:1.8;font-weight:400;
+}
+.hero-cta{
+  display:inline-flex;align-items:center;gap:10px;
+  background:var(--accent);color:white;
+  padding:14px 32px;border-radius:3px;font-size:14px;font-weight:600;
+  text-decoration:none;letter-spacing:0.5px;
+  box-shadow:0 0 30px rgba(255,32,32,0.3);
+  transition:all 0.25s;
+}
+.hero-cta:hover{background:#ff4040;transform:translateY(-2px);box-shadow:0 8px 40px rgba(255,32,32,0.4);}
+.hero-cta2{
+  display:inline-flex;align-items:center;gap:10px;
+  background:transparent;color:var(--text);
+  padding:14px 32px;border-radius:3px;font-size:14px;font-weight:600;
+  text-decoration:none;letter-spacing:0.5px;
+  border:1px solid var(--border);margin-left:12px;
+  transition:all 0.25s;
+}
+.hero-cta2:hover{border-color:var(--text);transform:translateY(-2px);}
+
+.hero-stats{
+  display:flex;justify-content:center;gap:64px;
+  margin-top:80px;padding-top:48px;
+  border-top:1px solid var(--border);
+  position:relative;
+}
+.hero-stats::before{
+  content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);
+  width:200px;height:1px;background:linear-gradient(90deg,transparent,var(--accent),transparent);
+}
+.stat-num{font-family:'Rajdhani',sans-serif;font-size:48px;font-weight:700;line-height:1;}
+.stat-num span{color:var(--accent);}
+.stat-label{font-size:11px;color:var(--muted);letter-spacing:2px;text-transform:uppercase;margin-top:6px;}
+
+/* WARN */
+.warn-strip{
+  background:linear-gradient(90deg,rgba(255,136,0,0.08),rgba(255,136,0,0.04),rgba(255,136,0,0.08));
+  border-top:1px solid rgba(255,136,0,0.15);
+  border-bottom:1px solid rgba(255,136,0,0.15);
+  padding:14px 48px;
+  display:flex;align-items:center;justify-content:center;gap:12px;
+  font-size:13px;color:var(--muted);
+}
+.warn-strip strong{color:var(--accent2);}
+
+/* INSTALL SECTION */
+.section{max-width:1300px;margin:0 auto;padding:80px 48px;}
+.section-head{display:flex;align-items:baseline;gap:16px;margin-bottom:40px;}
+.section-head h2{font-family:'Rajdhani',sans-serif;font-size:32px;font-weight:700;letter-spacing:1px;}
+.section-head p{font-size:13px;color:var(--muted);}
+
+.install-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;}
+.install-card{
+  background:var(--card);border:1px solid var(--border);border-radius:6px;
+  padding:24px;position:relative;overflow:hidden;
+  transition:border-color 0.25s,transform 0.25s;
+}
+.install-card:hover{border-color:rgba(255,32,32,0.3);transform:translateY(-2px);}
+.install-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,var(--accent),var(--accent2));
+  opacity:0.6;
+}
+.ic-step{
+  font-family:'Rajdhani',sans-serif;font-size:56px;font-weight:700;
+  color:rgba(255,32,32,0.08);line-height:1;margin-bottom:16px;
+}
+.ic-name{font-family:'Rajdhani',sans-serif;font-size:18px;font-weight:700;margin-bottom:10px;}
+.ic-desc{font-size:12px;color:var(--muted);line-height:1.7;margin-bottom:14px;}
+.ic-folder{
+  font-size:10px;font-family:monospace;
+  background:rgba(255,255,255,0.04);border:1px solid var(--border);
+  padding:5px 9px;border-radius:3px;color:var(--accent2);
+  display:block;margin-bottom:8px;word-break:break-all;
+}
+.ic-files{font-size:11px;color:var(--muted);margin-bottom:14px;line-height:1.5;}
+.ic-files strong{color:var(--text);}
+.ic-link{
+  display:flex;align-items:center;justify-content:center;gap:6px;
+  background:rgba(68,136,255,0.08);border:1px solid rgba(68,136,255,0.25);
+  color:var(--blue);padding:8px 12px;border-radius:3px;
+  font-size:11px;font-weight:600;text-decoration:none;
+  transition:all 0.2s;
+}
+.ic-link:hover{background:rgba(68,136,255,0.15);border-color:var(--blue);}
+
+/* BATTLEYE */
+.be-section{
+  background:var(--surface);
+  border-top:1px solid var(--border);border-bottom:1px solid var(--border);
+  padding:60px 48px;
+}
+.be-inner{max-width:1300px;margin:0 auto;}
+.be-card{
+  display:flex;gap:24px;
+  background:var(--card);border:1px solid var(--border);
+  border-left:3px solid var(--accent2);border-radius:6px;padding:28px;
+}
+.be-icon{font-size:36px;flex-shrink:0;}
+.be-title{font-family:'Rajdhani',sans-serif;font-size:22px;font-weight:700;color:var(--accent2);margin-bottom:10px;}
+.be-text{font-size:13px;color:var(--muted);line-height:1.75;margin-bottom:12px;}
+.be-text strong{color:var(--text);}
+.be-steps{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:14px;}
+.be-step{
+  display:flex;align-items:flex-start;gap:8px;
+  font-size:12px;color:var(--muted);
+  background:rgba(255,255,255,0.02);padding:8px 10px;border-radius:3px;
+}
+.be-step .dot{width:5px;height:5px;border-radius:50%;background:var(--accent2);flex-shrink:0;margin-top:5px;}
+
+/* MODS */
+.mods-bg{background:var(--surface);padding:80px 0;}
+.mods-inner{max-width:1300px;margin:0 auto;padding:0 48px;}
+
+/* TABS */
+.tabs{display:flex;gap:4px;margin-bottom:40px;flex-wrap:wrap;}
+.tab{
+  padding:8px 18px;border-radius:3px;font-size:12px;font-weight:600;
+  letter-spacing:0.5px;cursor:pointer;border:1px solid var(--border);
+  color:var(--muted);background:var(--card);transition:all 0.2s;
+}
+.tab:hover{border-color:rgba(255,32,32,0.3);color:var(--text);}
+.tab.active{background:var(--accent);border-color:var(--accent);color:white;box-shadow:0 0 16px rgba(255,32,32,0.3);}
+
+.mods-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;}
+
+/* CARD */
+.mod-card{
+  background:var(--card);border:1px solid var(--border);border-radius:6px;
+  overflow:hidden;cursor:pointer;
+  transition:border-color 0.25s,transform 0.25s,box-shadow 0.25s;
+}
+.mod-card:hover{border-color:var(--accent);transform:translateY(-4px);box-shadow:0 12px 40px rgba(255,32,32,0.12);}
+.mod-card.ultimate{border-color:rgba(170,68,255,0.4);}
+.mod-card.ultimate:hover{border-color:var(--purple);box-shadow:0 12px 40px rgba(170,68,255,0.15);}
+
+.mod-banner{height:110px;position:relative;overflow:hidden;}
+.mod-banner svg{width:100%;height:100%;}
+
+.mod-body{padding:16px;}
+.mod-top{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:8px;}
+.mod-title{font-family:'Rajdhani',sans-serif;font-size:17px;font-weight:700;line-height:1.2;}
+.badge{font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:3px 8px;border-radius:2px;white-space:nowrap;flex-shrink:0;}
+.badge-new{background:rgba(255,32,32,0.12);color:var(--accent);border:1px solid rgba(255,32,32,0.25);}
+.badge-hot{background:rgba(255,136,0,0.12);color:var(--accent2);border:1px solid rgba(255,136,0,0.25);}
+.badge-free{background:rgba(0,230,118,0.08);color:var(--green);border:1px solid rgba(0,230,118,0.18);}
+.badge-mega{background:rgba(170,68,255,0.12);color:var(--purple);border:1px solid rgba(170,68,255,0.25);}
+
+.mod-desc{font-size:11px;color:var(--muted);line-height:1.6;margin-bottom:12px;}
+.mod-req{background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:3px;padding:7px 10px;margin-bottom:12px;}
+.req-label{font-size:9px;color:var(--muted);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:5px;}
+.req-tags{display:flex;flex-wrap:wrap;gap:3px;}
+.req-tag{font-size:9px;padding:1px 7px;border-radius:2px;}
+.tag-shv{background:rgba(255,136,0,0.08);color:var(--accent2);border:1px solid rgba(255,136,0,0.2);}
+.tag-shvdn{background:rgba(255,32,32,0.08);color:var(--accent);border:1px solid rgba(255,32,32,0.2);}
+.tag-nui{background:rgba(68,136,255,0.08);color:var(--blue);border:1px solid rgba(68,136,255,0.2);}
+
+.mod-footer{display:flex;align-items:center;justify-content:space-between;gap:8px;}
+.key-combo{display:flex;gap:2px;align-items:center;flex-wrap:wrap;flex-shrink:0;}
+.key{background:var(--surface);border:1px solid var(--border);border-bottom:3px solid var(--border);border-radius:3px;padding:2px 7px;font-size:9px;font-weight:700;color:var(--text);}
+.key-sep{font-size:9px;color:var(--muted);}
+.btn-card{
+  display:inline-flex;align-items:center;gap:4px;
+  background:var(--accent);color:white;padding:6px 12px;border-radius:3px;
+  font-size:10px;font-weight:700;text-decoration:none;border:none;cursor:pointer;
+  transition:all 0.2s;white-space:nowrap;
+  box-shadow:0 0 12px rgba(255,32,32,0.25);
+}
+.btn-card:hover{background:#ff4040;transform:translateY(-1px);}
+.btn-card.purple{background:var(--purple);box-shadow:0 0 12px rgba(170,68,255,0.25);}
+.btn-card.purple:hover{background:#bb55ff;}
+
+/* MODAL */
+.overlay{
+  display:none;position:fixed;inset:0;
+  background:rgba(3,3,10,0.96);z-index:1000;
+  align-items:flex-start;justify-content:center;
+  backdrop-filter:blur(12px);overflow-y:auto;padding:24px 16px;
+}
+.overlay.open{display:flex;}
+.modal{
+  background:var(--card);border:1px solid var(--border);border-radius:8px;
+  width:100%;max-width:740px;padding:36px;position:relative;margin:auto;
+  box-shadow:0 32px 100px rgba(0,0,0,0.7);
+}
+.modal-banner{height:180px;border-radius:6px;overflow:hidden;margin-bottom:28px;}
+.modal-banner svg{width:100%;height:100%;}
+.modal-x{position:absolute;top:18px;right:18px;background:rgba(255,255,255,0.06);border:1px solid var(--border);color:var(--muted);font-size:18px;cursor:pointer;line-height:1;width:32px;height:32px;display:flex;align-items:center;justify-content:center;border-radius:3px;transition:all 0.2s;}
+.modal-x:hover{color:var(--text);background:rgba(255,255,255,0.1);}
+.modal h2{font-family:'Rajdhani',sans-serif;font-size:34px;font-weight:700;margin-bottom:6px;}
+.modal-sub{font-size:10px;color:var(--muted);letter-spacing:2px;text-transform:uppercase;margin-bottom:18px;display:block;}
+.modal-desc{font-size:13px;color:var(--muted);line-height:1.85;margin-bottom:22px;}
+
+.warn-box{background:rgba(255,32,32,0.06);border:1px solid rgba(255,32,32,0.2);border-radius:4px;padding:12px 16px;margin-bottom:22px;font-size:12px;color:var(--muted);line-height:1.6;}
+.warn-box strong{color:var(--accent);}
+
+.m-sec{margin-bottom:24px;}
+.m-title{
+  font-family:'Rajdhani',sans-serif;font-size:13px;font-weight:700;
+  letter-spacing:2px;text-transform:uppercase;color:var(--muted);
+  margin-bottom:12px;padding-bottom:9px;border-bottom:1px solid var(--border);
+  display:flex;align-items:center;gap:10px;
+}
+.m-title::before{content:'';display:block;width:3px;height:14px;background:var(--accent);border-radius:2px;flex-shrink:0;}
+
+.dl-item{
+  display:flex;align-items:flex-start;gap:14px;
+  padding:14px;background:rgba(255,255,255,0.02);
+  border:1px solid var(--border);border-radius:5px;margin-bottom:10px;
+  transition:border-color 0.2s;
+}
+.dl-item:hover{border-color:rgba(255,32,32,0.2);}
+.dl-num{font-family:'Rajdhani',sans-serif;font-size:30px;font-weight:700;color:var(--accent);line-height:1;flex-shrink:0;width:34px;opacity:0.6;}
+.dl-info{flex:1;min-width:0;}
+.dl-name{font-family:'Rajdhani',sans-serif;font-size:16px;font-weight:700;margin-bottom:4px;}
+.dl-desc{font-size:12px;color:var(--muted);line-height:1.6;margin-bottom:8px;}
+.dl-row{display:flex;align-items:center;gap:8px;margin-bottom:6px;flex-wrap:wrap;}
+.dl-lbl{font-size:9px;color:var(--muted);letter-spacing:1.5px;text-transform:uppercase;flex-shrink:0;}
+.dl-path{font-size:10px;font-family:monospace;background:rgba(255,255,255,0.05);border:1px solid var(--border);padding:3px 8px;border-radius:2px;color:var(--accent2);}
+.dl-files{font-size:11px;color:var(--muted);margin-bottom:10px;}
+.dl-files strong{color:var(--text);}
+.btn-ext{
+  display:inline-flex;align-items:center;gap:5px;
+  background:transparent;color:var(--blue);
+  padding:7px 14px;border-radius:3px;font-size:11px;font-weight:600;
+  text-decoration:none;border:1px solid rgba(68,136,255,0.3);cursor:pointer;
+  transition:all 0.2s;
+}
+.btn-ext:hover{background:rgba(68,136,255,0.08);border-color:var(--blue);}
+
+.step-item{
+  display:flex;gap:12px;margin-bottom:10px;
+  padding:11px 14px;background:rgba(255,255,255,0.02);
+  border-radius:4px;border-left:3px solid var(--accent);
+}
+.step-n{font-family:'Rajdhani',sans-serif;font-size:20px;font-weight:700;color:var(--accent);flex-shrink:0;width:20px;line-height:1.2;opacity:0.7;}
+.step-t{font-size:12px;color:var(--text);line-height:1.7;}
+
+.feat-list{list-style:none;}
+.feat-list li{font-size:12px;padding:6px 0;border-bottom:1px solid var(--border);display:flex;gap:10px;line-height:1.55;color:var(--muted);}
+.feat-list li::before{content:'▸';color:var(--accent);flex-shrink:0;margin-top:1px;}
+
+.modal-foot{
+  display:flex;align-items:center;justify-content:space-between;
+  padding-top:18px;border-top:1px solid var(--border);
+  margin-top:6px;flex-wrap:wrap;gap:14px;
+}
+.key-info{font-size:12px;color:var(--muted);}
+.key-info strong{color:var(--text);}
+.btn-download{
+  display:inline-flex;align-items:center;gap:7px;
+  background:var(--accent);color:white;padding:10px 22px;border-radius:4px;
+  font-size:13px;font-weight:700;text-decoration:none;border:none;cursor:pointer;
+  box-shadow:0 0 24px rgba(255,32,32,0.3);transition:all 0.2s;
+}
+.btn-download:hover{background:#ff4040;transform:translateY(-1px);}
+
+/* FOOTER */
+footer{
+  background:var(--bg);border-top:1px solid var(--border);
+  padding:48px;text-align:center;
+}
+footer p{font-size:13px;color:var(--muted);line-height:1.8;}
+footer strong{color:var(--text);}
+
+@media(max-width:1000px){.install-grid{grid-template-columns:1fr 1fr;}}
+@media(max-width:640px){
+  .install-grid{grid-template-columns:1fr;}
+  .hero-stats{gap:28px;}
+  nav{padding:0 20px;}
+  .section,.mods-inner{padding-left:20px;padding-right:20px;}
+  .be-section{padding:40px 20px;}
+  .be-steps{grid-template-columns:1fr;}
+  .modal{padding:22px;}
+  .hero-cta2{margin-left:0;margin-top:10px;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="logo" href="#">LELE<span>MODS</span></a>
+  <div class="nav-links">
+    <a href="#install">Installation</a>
+    <a href="#battleye">BattlEye</a>
+    <a href="#mods">Mods <span class="nav-badge">26</span></a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="hero-tag">GTA V Story Mode · 100% Kostenlos · Kein Virus</div>
+    <h1>
+      <span class="white">LELE</span><span class="red">MODS</span>
+    </h1>
+    <p class="hero-desc">26 handgemachte GTA V Script-Mods. Von kleinen Einzel-Mods bis zu riesigen Mod-Menüs mit ganzen Systemen. Klick auf einen Mod für die vollständige Anleitung mit allen Download-Links.</p>
+    <div>
+      <a class="hero-cta" href="#mods">Alle Mods ansehen</a>
+      <a class="hero-cta2" href="#install">Installation</a>
+    </div>
+    <div class="hero-stats">
+      <div><div class="stat-num">26<span>+</span></div><div class="stat-label">Mods</div></div>
+      <div><div class="stat-num">5<span>x</span></div><div class="stat-label">Mega-Menüs</div></div>
+      <div><div class="stat-num">0<span>€</span></div><div class="stat-label">Für immer</div></div>
+    </div>
+  </div>
+</section>
+
+<div class="warn-strip">
+  ⚠️ <strong>Nur GTA V Story Mode!</strong> In GTA Online niemals benutzen – Rockstar bannt Accounts dauerhaft.
+</div>
+
+<!-- INSTALLATION -->
+<section class="section" id="install">
+  <div class="section-head">
+    <h2>INSTALLATION</h2>
+    <p>Diese 3 Programme einmal installieren — dann laufen alle 26 Mods</p>
+  </div>
+  <div class="install-grid">
+    <div class="install-card">
+      <div class="ic-step">1</div>
+      <div class="ic-name">Script Hook V</div>
+      <div class="ic-desc">Das Basis-Programm für alle GTA V Mods. Ohne Script Hook V läuft kein einziger Mod. Wird nach jedem GTA Update von Alexander Blade aktualisiert.</div>
+      <span class="ic-folder">📁 GTA V Hauptordner (wo GTA5.exe liegt)</span>
+      <div class="ic-files">Dateien: <strong>ScriptHookV.dll + dinput8.dll</strong></div>
+      <a href="https://www.dev-c.com/gtav/scripthookv/" target="_blank" class="ic-link">🔗 dev-c.com/gtav/scripthookv → ZIP runterladen</a>
+    </div>
+    <div class="install-card">
+      <div class="ic-step">2</div>
+      <div class="ic-name">SHVDN Nightly</div>
+      <div class="ic-desc">ScriptHookVDotNet – macht dass GTA V die .cs Mod-Dateien laden kann. Immer die NEUESTE Nightly-Version nehmen!</div>
+      <span class="ic-folder">📁 GTA V Hauptordner (wo GTA5.exe liegt)</span>
+      <div class="ic-files">Dateien: <strong>ScriptHookVDotNet.asi + ScriptHookVDotNet2.dll + ScriptHookVDotNet3.dll</strong></div>
+      <a href="https://github.com/scripthookvdotnet/scripthookvdotnet-nightly/releases" target="_blank" class="ic-link">🔗 GitHub → neuestes ZIP → 3 Dateien rein</a>
+    </div>
+    <div class="install-card">
+      <div class="ic-step">3</div>
+      <div class="ic-name">NativeUI</div>
+      <div class="ic-desc">Zeichnet die Menüs im Spiel. Ohne NativeUI.dll erscheint kein Menü wenn du eine Taste drückst. Nur eine Datei nötig.</div>
+      <span class="ic-folder">📁 scripts Ordner → GTA V Hauptordner\scripts\</span>
+      <div class="ic-files">Datei: <strong>NativeUI.dll</strong></div>
+      <a href="https://github.com/Guad/NativeUI/releases" target="_blank" class="ic-link">🔗 GitHub → Release.zip → NativeUI.dll in scripts</a>
+    </div>
+    <div class="install-card">
+      <div class="ic-step">4</div>
+      <div class="ic-name">Mod installieren</div>
+      <div class="ic-desc">Wenn 1-3 fertig: Mod herunterladen, ZIP entpacken, .cs Datei in den scripts Ordner. GTA V starten – Mod lädt automatisch. Fertig!</div>
+      <span class="ic-folder">📁 scripts Ordner → GTA V Hauptordner\scripts\</span>
+      <div class="ic-files">Datei: <strong>ModName.cs</strong> (aus der ZIP)</div>
+      <div class="ic-link" style="cursor:default;opacity:0.4;">↓ Klick auf einen Mod und folge der Anleitung</div>
+    </div>
+  </div>
+</section>
+
+<!-- BATTLEYE -->
+<section class="be-section" id="battleye">
+  <div class="be-inner">
+    <div class="section-head"><h2>BATTLEYE</h2><p>Muss ich das deaktivieren?</p></div>
+    <div class="be-card">
+      <div class="be-icon">🛡️</div>
+      <div>
+        <div class="be-title">Ja – BattlEye muss deaktiviert sein</div>
+        <p class="be-text"><strong>BattlEye ist Rockstars Anti-Cheat</strong> und blockiert Script Hook V automatisch wenn es aktiv ist. Im Story Mode hat BattlEye keine andere Funktion – es schützt nur GTA Online. Das Deaktivieren ist vollständig sicher solange du nur im Story Mode spielst.</p>
+        <p class="be-text"><strong>Wichtig:</strong> Niemals GTA Online spielen wenn BattlEye deaktiviert ist – Rockstar bannt Accounts dafür.</p>
+        <div class="be-steps">
+          <div class="be-step"><div class="dot"></div>Epic Games Launcher → Bibliothek → GTA V → drei Punkte (...) → Eigenschaften</div>
+          <div class="be-step"><div class="dot"></div>Rockstar Games Launcher → GTA V Einstellungen → Anti-Cheat deaktivieren</div>
+          <div class="be-step"><div class="dot"></div>BattlEye Haken entfernen / deaktivieren</div>
+          <div class="be-step"><div class="dot"></div>GTA V neu starten → Script Hook V und alle Mods funktionieren jetzt</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MODS -->
+<section class="mods-bg" id="mods">
+  <div class="mods-inner">
+    <div class="section-head"><h2>ALLE MODS</h2><p>Klick auf einen Mod für vollständige Anleitung + alle Download-Links</p></div>
+    <div class="tabs">
+      <div class="tab active" onclick="filterMods('all',this)">Alle (26)</div>
+      <div class="tab" onclick="filterMods('mega',this)">⭐ Mega-Menüs (7)</div>
+      <div class="tab" onclick="filterMods('combat',this)">⚔ Kampf & Crew</div>
+      <div class="tab" onclick="filterMods('vehicle',this)">🚗 Fahrzeuge</div>
+      <div class="tab" onclick="filterMods('world',this)">🌍 Welt & Atmosphäre</div>
+      <div class="tab" onclick="filterMods('player',this)">🦸 Spieler</div>
+    </div>
+    <div class="mods-grid" id="grid"></div>
+  </div>
+</section>
+
+<footer>
+  <p><strong>LeleMods.com</strong> — 26 kostenlose GTA V Script-Mods. Nur für den Story Mode.<br>Niemals in GTA Online verwenden. Kein Virus, kein Tracker, kein Bullshit.</p>
+</footer>
+
+<!-- MODAL -->
+<div class="overlay" id="overlay" onclick="cm(event)">
+  <div class="modal">
+    <button class="modal-x" onclick="cl()">✕</button>
+    <div id="mb"></div>
+  </div>
+</div>
+
+<script>
+// ── SVG GENERATOREN ────────────────────────────────────────────────────────
+function svgG(emoji,label,c1,c2,animated){
+  const id='g'+Math.random().toString(36).substr(2,6);
+  const anim=animated?`<circle cx="100" cy="55" r="40" fill="${c1}" opacity="0.15"><animate attributeName="r" values="30;50;30" dur="2s" repeatCount="indefinite"/></circle><circle cx="300" cy="55" r="35" fill="${c2}" opacity="0.12"><animate attributeName="r" values="35;20;35" dur="2s" repeatCount="indefinite"/></circle>`:'';
+  return`<svg viewBox="0 0 400 110" xmlns="http://www.w3.org/2000/svg">
+    <defs><linearGradient id="${id}" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="${c1}"/><stop offset="100%" stop-color="${c2}"/></linearGradient></defs>
+    <rect width="400" height="110" fill="url(#${id})"/>
+    <rect width="400" height="110" fill="rgba(0,0,0,0.4)"/>
+    ${anim}
+    <text x="50%" y="46%" dominant-baseline="middle" text-anchor="middle" font-size="38" font-family="Segoe UI Emoji,Apple Color Emoji,sans-serif">${emoji}</text>
+    <rect x="0" y="88" width="400" height="22" fill="rgba(0,0,0,0.65)"/>
+    <text x="12" y="103" font-family="Rajdhani,sans-serif" font-size="12" font-weight="700" fill="rgba(255,255,255,0.55)" letter-spacing="2">${label.toUpperCase()}</text>
+  </svg>`;
+}
+function svgPolice(){
+  return`<svg viewBox="0 0 400 110" xmlns="http://www.w3.org/2000/svg">
+    <rect width="400" height="110" fill="#060618"/>
+    <circle cx="80" cy="55" r="40" fill="rgba(0,80,255,0.12)"><animate attributeName="r" values="30;45;30" dur="1.8s" repeatCount="indefinite"/></circle>
+    <circle cx="80" cy="55" r="18" fill="rgba(0,80,255,0.25)"><animate attributeName="r" values="18;26;18" dur="1.8s" repeatCount="indefinite"/></circle>
+    <circle cx="320" cy="55" r="40" fill="rgba(255,20,20,0.12)"><animate attributeName="r" values="40;28;40" dur="1.8s" repeatCount="indefinite"/></circle>
+    <circle cx="320" cy="55" r="18" fill="rgba(255,20,20,0.25)"><animate attributeName="r" values="26;16;26" dur="1.8s" repeatCount="indefinite"/></circle>
+    <text x="50%" y="46%" dominant-baseline="middle" text-anchor="middle" font-size="38" font-family="Segoe UI Emoji,Apple Color Emoji,sans-serif">🚔</text>
+    <rect x="0" y="88" width="400" height="22" fill="rgba(0,0,0,0.7)"/>
+    <text x="12" y="103" font-family="Rajdhani,sans-serif" font-size="12" font-weight="700" fill="rgba(100,140,255,0.7)" letter-spacing="2">POLICE & SECURITY ULTIMATE</text>
+  </svg>`;
+}
+function svgExplosion(){
+  return`<svg viewBox="0 0 400 110" xmlns="http://www.w3.org/2000/svg">
+    <rect width="400" height="110" fill="#100400"/>
+    <circle cx="200" cy="55" r="55" fill="rgba(255,80,0,0.08)"><animate attributeName="r" values="40;65;40" dur="1.2s" repeatCount="indefinite"/></circle>
+    <circle cx="200" cy="55" r="28" fill="rgba(255,150,0,0.12)"><animate attributeName="r" values="22;36;22" dur="1.2s" repeatCount="indefinite"/></circle>
+    <text x="50%" y="46%" dominant-baseline="middle" text-anchor="middle" font-size="38" font-family="Segoe UI Emoji,Apple Color Emoji,sans-serif">💥</text>
+    <rect x="0" y="88" width="400" height="22" fill="rgba(0,0,0,0.7)"/>
+    <text x="12" y="103" font-family="Rajdhani,sans-serif" font-size="12" font-weight="700" fill="rgba(255,100,0,0.7)" letter-spacing="2">CHAOS & POWERS ULTIMATE</text>
+  </svg>`;
+}
+
+// ── MOD DATA ───────────────────────────────────────────────────────────────
+const SHV={name:"Script Hook V",desc:"Basis-Programm für alle GTA V Mods. Ohne dieses läuft nichts.",path:"GTA V Hauptordner (wo GTA5.exe liegt)",files:"ScriptHookV.dll + dinput8.dll",url:"https://www.dev-c.com/gtav/scripthookv/"};
+const SHVDN={name:"SHVDN Nightly",desc:"Macht dass GTA V .cs Dateien laden kann. Immer die neueste Nightly-Version!",path:"GTA V Hauptordner",files:"ScriptHookVDotNet.asi + ScriptHookVDotNet2.dll + ScriptHookVDotNet3.dll",url:"https://github.com/scripthookvdotnet/scripthookvdotnet-nightly/releases"};
+const NUI={name:"NativeUI",desc:"Zeichnet das Menü im Spiel. Ohne diese Datei kein sichtbares Menü.",path:"scripts Ordner → GTA V Hauptordner\\scripts\\",files:"NativeUI.dll",url:"https://github.com/Guad/NativeUI/releases"};
+
+const mods=[
+// ── MEGA-MENÜS ──
+{cat:'mega',svg:svgPolice(),badge:'mega',title:'Police & Security Ultimate',sub:'Polizei · Bodyguards · Dispatch · Einsatzfahrzeuge',key:'F1',
+ desc:'Das komplette Polizei und Sicherheits-System. Erweiterter Dispatch-Funk mit 6 verschiedenen zufälligen Einsätzen, Verdächtiger flüchtet auf der Karte und muss festgenommen werden, 7 Bodyguard-Typen vom normalen Cop bis zum unverwundbaren SWAT-Elite, 7 Einsatzfahrzeuge und vollständige Fahrzeug-Synchronisation.',
+ features:['📻 Dispatch: 6 zufällige Einsätze (Fahrzeugdiebstahl, Bankraub, Schießerei, Verfolgungsjagd...)','🗺 Verdächtiger erscheint als roter Blip auf Karte und flüchtet aktiv im Fahrzeug','🚨 Festnahme: Verdächtigen festnehmen wenn nah genug, wird ins Gefängnis teleportiert','📡 Verstärkung: 3 normale Cops oder 6 SWAT-Einheiten anfordern','🛡 7 Bodyguard-Typen: Cop, Polizistin, Sheriff, Highway Patrol, SWAT Elite (unverwundbar), FIB Agent, Park Ranger','🚗 7 Einsatzfahrzeuge: Police Cruiser, Bike, Interceptor, Sheriff SUV, FIB SUV, SWAT Van, Police Heli','🚧 Straßensperren errichten mit Fahrzeugen und Cops','Bodyguards folgen ins Auto, spiegeln deine Waffe, bekämpfen dein Ziel'],
+ file:'PoliceSecurityUltimate.zip',
+ steps:['BattlEye deaktivieren (Epic/Rockstar Launcher → GTA V Einstellungen → BattlEye aus)','Script Hook V von dev-c.com installieren → ScriptHookV.dll + dinput8.dll in GTA V Ordner','SHVDN Nightly von GitHub → 3 Dateien in GTA V Ordner','NativeUI von GitHub → NativeUI.dll in scripts Ordner','PoliceSecurityUltimate.zip runterladen → PoliceSecurityUltimate.cs in scripts Ordner','GTA V starten → F1 drücken → Menü öffnet sich']},
+
+{cat:'mega',svg:svgG('🌍','World Builder Ultimate','#040810','#0a0f1a',true),badge:'mega',title:'World Builder Ultimate',sub:'Wetter · Zeit · Katastrophen · 8 Atmosphären',key:'F2',
+ desc:'Kontrolliere alles rund um die Spielwelt. 12 Wetter-Typen, 7 Uhrzeiten, Zeit einfrieren, 4 Zeitlupe-Stufen bis zum Matrix-Modus, 6 Naturkatastrophen und 8 einzigartige Atmosphären die die komplette Stimmung des Spiels verändern.',
+ features:['☀ 12 Wetter-Typen: Sonnig, Klar, Bewölkt, Regen, Gewitter, Smog, Nebel, Weihnachten, Schnee, Blizzard','⏰ 7 Uhrzeiten: Mitternacht bis Nacht','⏸ Zeit einfrieren auf beliebigem Stand','🐌 4 Zeitlupe-Stufen: 0.5x / 0.3x / 0.1x / Matrix (0.05x)','☄ Meteor-Regen: 10 Einschläge gleichzeitig','🌍 Erdbeben mit Kamera-Shake','⛈ Blitzgewitter mit echten Einschlägen','💥 Massen-Explosion: 30 Explosionen auf einmal','🌃 8 Atmosphären: Post-Apokalypse, Cyberpunk, Goldene Stunde, Winter, Kriegszone, Halloween, Sturm, Wüste'],
+ file:'WorldBuilderUltimate.zip',
+ steps:['BattlEye deaktivieren','Script Hook V + SHVDN Nightly + NativeUI installieren','WorldBuilderUltimate.zip → WorldBuilderUltimate.cs in scripts Ordner','GTA V starten → F2 drücken']},
+
+{cat:'mega',svg:svgG('⚔','Combat & Crew Ultimate','#0c0404','#180a08',true),badge:'mega',title:'Combat & Crew Ultimate',sub:'Gang · Bounty Hunter · Waffen · Survival-Wellen',key:'F3',
+ desc:'Komplettes Kampf- und Crew-System. Baue deine Gang, jage Kopfgeld-Ziele für Belohnungen, rüste dich mit allen Waffen aus und überlebe im Survival-Modus immer schwieriger werdende Feind-Wellen.',
+ features:['👥 6 Freunde: Families Gangster, Lost MC Biker, Söldner, Franklin, Trevor, Michael','⚔ 4 Feinde: Ballas, Lost MC Feind, Söldner, Straßen-Punk','⭐ Gottmodus für die ganze Crew auf einmal','💰 Bounty Hunter: $5k–$50k Ziele aufspüren, abliefern, Belohnung kassieren','💥 Alle 15 Waffen + Unendlich Munition + Explosive Kugeln + Feuerkugeln','🛡 Survival: automatische Wellen, Welle 1=5 Feinde, jede Welle mehr und stärker','💊 Notfall-Heilung + Feinde alle entfernen','Wanted Level löschen per Klick'],
+ file:'CombatCrewUltimate.zip',
+ steps:['BattlEye deaktivieren','Script Hook V + SHVDN Nightly + NativeUI installieren','CombatCrewUltimate.zip → CombatCrewUltimate.cs in scripts Ordner','GTA V starten → F3 drücken']},
+
+{cat:'mega',svg:svgG('🚗','Vehicle & Speed Ultimate','#040c04','#081508',true),badge:'mega',title:'Vehicle & Speed Ultimate',sub:'25+ Fahrzeuge · Tuning · Racing · Nitro',key:'F4',
+ desc:'Alles rund um Fahrzeuge in einem riesigen Menü. 25+ Fahrzeuge in 4 Kategorien spawnen, aktuelles Auto voll tunen, Straßenrennen gegen KI starten und Nitro-Boost nutzen.',
+ features:['🏎 10 Sportwagen: Zentorno, T20, Osiris, Entity XF, Cheetah, Adder, Reaper, Turismo R, Infernus, Krieger','🪖 5 Militärfahrzeuge: Rhino Tank, Insurgent, APC, Barracks, Merryweather Mesa','✈ 6 Luftfahrzeuge: Hydra, Lazer, Buzzard, Annihilator, Savage, Cargobob','🔧 Voll tunen mit einem Klick (alle 50 Upgrade-Slots auf Max)','🎨 9 Farben + Unzerstörbar + Kugelsichere Reifen + Max-Speed setzen','🏁 Rennen gegen 3 oder 6 KI-Gegner mit Waypoint-Ziel','⚡ Nitro-Boost einmalig + Super-Speed zu Fuß (5x)','🔄 Fahrzeug aufrichten + reinigen'],
+ file:'VehicleSpeedUltimate.zip',
+ steps:['BattlEye deaktivieren','Script Hook V + SHVDN Nightly + NativeUI installieren','VehicleSpeedUltimate.zip → VehicleSpeedUltimate.cs in scripts Ordner','GTA V starten → F4 drücken']},
+
+{cat:'mega',svg:svgExplosion(),badge:'mega',title:'Chaos & Powers Ultimate',sub:'Superhero · NoClip · Aliens · Prison Break · Zeitreise',key:'F5',
+ desc:'Das totale Chaos-Menü. Superhero-Kräfte, explosive Kugeln, NoClip, Alien-Invasion, Prison Break Szenario und Zeitreise-Atmosphären. Alles in einem riesigen Menü.',
+ features:['🦸 Superhero: Fliegen, Super-Speed 5x, Gottmodus, Laser-Augen, Schockwelle, Unsichtbarkeit','💥 Explosive Kugeln + Feuerkugeln dauerhaft','☄ Meteor-Regen + 30 Massen-Explosionen + Schwebeangriff','👻 NoClip: 4 Geschwindigkeiten (1x–10x), durch Wände fliegen','👽 Alien Invasion: automatischer Spawn, Abduktions-Strahl, Alien-Railgun','🔓 Prison Break: Im Gefängnis starten, Mithäftlinge befreien, Flucht','⏱ 6 Atmosphären: Post-Apokalypse, Cyberpunk, Winter, Kriegszone, Halloween, Goldene Stunde','🐌 Matrix Zeitlupe (0.1x)','✅ Alles zurücksetzen mit einem Klick'],
+ file:'ChaosPowersUltimate.zip',
+ steps:['BattlEye deaktivieren','Script Hook V + SHVDN Nightly + NativeUI installieren','ChaosPowersUltimate.zip → ChaosPowersUltimate.cs in scripts Ordner','GTA V starten → F5 drücken']},
+
+{cat:'mega',svg:svgG('🎮','Ultimate Mega Mod','#080510','#100a1a',true),badge:'mega',title:'Ultimate Mega Mod',sub:'10 Systeme in einer Datei · Das Größte',key:'F6 / L1+R1',
+ desc:'Das größte Mod auf LeleMods. 10 komplette Systeme in einer einzigen Datei: Polizei-Dispatch, Superhero, Street Racing, Naturkatastrophen, Bounty Hunter, Mafia Boss, Alien-Invasion, Prison Break, Survival-Wellen und Zeitreise.',
+ features:['🚔 Polizei: Dispatch-Funk, Verdächtiger auf Karte, Festnahme, Verstärkung, Straßensperren','🦸 Superhero: Fliegen, Super-Speed, Laser-Augen, Schockwelle, Unsichtbarkeit','🏎 Street Racing: 3–6 KI-Gegner, Nitro-Boost','🌪 Katastrophen: Meteor-Regen, Erdbeben, Gewitter, Explosionsregen','💰 Bounty Hunter: Zielpersonen, Belohnungen kassieren','🤵 Mafia Boss: Crew aufbauen, Rivalen, Auftragskiller','👽 Alien Invasion: automatischer Spawn, Abduktions-Strahl','🔓 Prison Break: Im Gefängnis starten und ausbrechen','🛡 Survival: Wellen-System mit steigendem Schwierigkeitsgrad','⏱ Zeitreise: 6 Atmosphären + Zeitlupe'],
+ file:'UltimateMegaMod.zip',
+ steps:['BattlEye deaktivieren','Script Hook V + SHVDN Nightly + NativeUI installieren','UltimateMegaMod.zip → UltimateMegaMod.cs in scripts Ordner','GTA V starten → F6 drücken (oder L1+R1 halten am Controller)']},
+
+{cat:'mega',svg:svgG('🚔','Leles Begleiter-Mod','#0a0408','#18080f',true),badge:'new',title:'Leles Begleiter-Mod',sub:'Begleiter · Polizei · Gang · Waypoint-Einsatz',key:'L1+R1 halten',
+ desc:'Spawne unbegrenzte Begleiter aus 15 Fraktionen. Karten-Blips, Gottmodus, Waffenauswahl, Fahrzeug-Sync, Waypoint-Einsätze und automatische Verstärkung wenn du in Unterzahl gerätst.',
+ features:['15 Modelle: Police, Sheriff, SWAT, FIB, Ranger, Families, Ballas, Lost MC, Franklin, Trevor, Michael','Karten-Blips: grün=normal, gelb=Gottmodus, pink=ausgewählt','Gottmodus pro Begleiter einzeln','Im Fahrzeug bleiben bis du aussteigst','Waffe ziehen/wegstecken spiegeln','Gleiches Ziel bekämpfen','Kampf am Waypoint (3 oder 8 Kriminelle)','Verstärkung rufen (klein oder SWAT)','Auto-Eskalation bei Überzahl','Begleiter-Liste: einzeln bearbeiten/löschen'],
+ file:'LelesMod.zip',
+ steps:['BattlEye deaktivieren','Script Hook V + SHVDN Nightly + NativeUI installieren','LelesMod.zip → LelesMod.cs in scripts Ordner','GTA V starten → L1+R1 ca. 0,5 Sek. halten → Menü oben rechts']},
+
+// ── COMBAT ──
+{cat:'combat',svg:svgG('🧟','Zombie Apokalypse','#030a03','#071507',true),badge:'hot',title:'Zombie Apokalypse',sub:'Horror · Survival · Apokalypse',key:'Strg+Z',
+ desc:'Zombies spawnen automatisch alle 2 Sekunden um dich herum. 4 Schwierigkeiten bis zu 80 gleichzeitigen Zombies. Überlebe so lange wie möglich.',
+ features:['Automatischer Zombie-Spawn alle 2 Sekunden','4 Schwierigkeiten: 10/20/40/80 Zombies gleichzeitig','Zombies in eigener feindlicher Gruppe','Alle Zombies sofort entfernen','Anzahl aktiver Zombies anzeigen'],
+ file:'ZombieMod.zip',
+ steps:['Script Hook V + SHVDN Nightly + NativeUI installieren','ZombieMod.zip → ZombieMod.cs in scripts Ordner','GTA V starten → Strg+Z → Schwierigkeit wählen → Checkbox aktivieren']},
+
+{cat:'combat',svg:svgG('🔫','Waffen Arsenal','#030803','#071208',false),badge:'hot',title:'Waffen Arsenal',sub:'Alle Waffen · Unendlich Munition · Effekte',key:'F12',
+ desc:'Alle Waffen sofort, unendliche Munition, explosive und Feuerkugeln. Alles per Checkbox dauerhaft aktivierbar.',
+ features:['Alle 15 Waffen auf einmal','Munition aller Waffen auffüllen','Unendlich Munition (dauerhaft)','Kein Rückstoß Modus','Explosive Kugeln + Feuerkugeln','Alle Waffen entfernen'],
+ file:'WeaponArsenal.zip',
+ steps:['Script Hook V + SHVDN Nightly + NativeUI installieren','WeaponArsenal.zip → WeaponArsenal.cs in scripts Ordner','GTA V starten → F12 drücken']},
+
+{cat:'combat',svg:svgG('💰','Heist Planner','#030308','#060612',false),badge:'hot',title:'Heist Planner',sub:'Bankraub · Crew · Beute',key:'F9',
+ desc:'Plane und führe eigene Banküberfälle durch. Crew zusammenstellen, Bank ausrauben, Beute kassieren und der Polizei entkommen.',
+ features:['4 Bankziele: Fleeca ($50k), Paleto Bay ($120k), Pacific Standard ($500k), Mazda ($250k)','Crew: Michael, Trevor, Franklin, Gangster, Ex-Militär','Polizei-Reaktion (Wanted Level 3) nach Überfall','Beute direkt auf Konto','Polizei per Menü abschütteln'],
+ file:'HeistMod.zip',
+ steps:['Script Hook V + SHVDN Nightly + NativeUI installieren','HeistMod.zip → HeistMod.cs in scripts Ordner','GTA V starten → F9 → Crew spawnen → Ziel wählen']},
+
+{cat:'combat',svg:svgG('💥','Chaos Mod','#0f0400','#1a0800',true),badge:'hot',title:'Chaos Mod',sub:'Explosionen · Feuerkugeln · Meteor-Regen',key:'Strg+X',
+ desc:'Explosionen am Waypoint, Meteor-Regen, explosive Kugeln, Feuerkugeln und Blackhole-Effekt.',
+ features:['Explosion am Wegpunkt','Explosion um dich herum','Explosive Kugeln dauerhaft','Feuerkugeln dauerhaft','Blackhole-Effekt','Meteor-Regen (10 Einschläge)'],
+ file:'ChaosMod.zip',
+ steps:['Script Hook V + SHVDN Nightly + NativeUI installieren','ChaosMod.zip → ChaosMod.cs in scripts Ordner','GTA V starten → Strg+X']},
+
+{cat:'combat',svg:svgG('👥','NPC Spawner','#0a0308','#15060f',false),badge:'new',title:'NPC Spawner',sub:'Freunde · Feinde · Tiere',key:'Strg+E',
+ desc:'Spawne beliebige Charaktere als Freunde oder Feinde. Story-Charaktere, Gangmitglieder, Militär oder Tiere.',
+ features:['Freunde: Bodyguard, Gangster, Franklin, Trevor, Michael','Feinde: Ballas, Lost MC, Militär, Söldner, Punks','Tiere: Hund, Katze, Hirsch, Coyote, Hai','Alle NPCs auf einmal entfernen'],
+ file:'NPCSpawnerMod.zip',
+ steps:['Script Hook V + SHVDN Nightly + NativeUI installieren','NPCSpawnerMod.zip → NPCSpawnerMod.cs in scripts Ordner','GTA V starten → Strg+E']},
+
+// ── VEHICLE ──
+{cat:'vehicle',svg:svgG('🚗','Modern Cars','#060a10','#0a1018',false),badge:'hot',title:'Modern Cars',sub:'8 fiktive Superautos · Boost · Sprung',key:'F7',
+ desc:'8 fiktive Superautos mit einzigartigen Fähigkeiten. Voll getuned, zufällige Farbe, sofort fahrbereit.',
+ features:['Phantom X-9: kugelsicher, Militärtarn','Volta Zenith: Elektro-Hypercar + Boost','Aegis Titan: Panzerung + Sprung','Nova Stryker: Jetboost','Colossus Prime: Militär-SUV gepanzert','Apex Shadow: Stealth-Sportwagen','Thunderclad V8: Muscle-Car + Boost','Hydra Storm: Amphibienfahrzeug','Boost: Strg+B | Sprung: Strg+J'],
+ file:'ModernCars.zip',
+ steps:['Script Hook V + SHVDN Nightly + NativeUI installieren','ModernCars.zip → ModernCars.cs in scripts Ordner','GTA V starten → F7 → Auto wählen']},
+
+{cat:'vehicle',svg:svgG('🚙','Fahrzeug Spawner','#040a06','#081408',false),badge:'hot',title:'Fahrzeug Spawner',sub:'Sportwagen · Militär · Flugzeuge',key:'Strg+G',
+ desc:'Spawn jedes Fahrzeug aus 4 Kategorien direkt neben dir. Du wirst sofort als Fahrer eingesetzt.',
+ features:['9 Sportwagen: Zentorno, T20, Osiris, Entity XF und mehr','5 Militärfahrzeuge: Rhino Tank, Insurgent, APC...','6 Flugzeuge & Helikopter: Hydra, Lazer, Buzzard...','Zufällige Farbe beim Spawn','Aktuelles Fahrzeug löschen'],
+ file:'VehicleSpawnerMod.zip',
+ steps:['Script Hook V + SHVDN Nightly + NativeUI installieren','VehicleSpawnerMod.zip → VehicleSpawnerMod.cs in scripts Ordner','GTA V starten → Strg+G']},
+
+{cat:'vehicle',svg:svgG('🔧','Fahrzeug Tuning','#040a0a','#081515',false),badge:'free',title:'Fahrzeug Tuning',sub:'Farbe · Upgrades · Reparatur',key:'Strg+V',
+ desc:'Tune dein aktuelles Fahrzeug ohne Werkstatt. Alle Upgrades, 10 Farben, unzerstörbar und mehr.',
+ features:['Sofort reparieren','Alle Upgrades auf Maximum','Unzerstörbar-Modus','Kugelsichere Reifen','10 Farben wählbar','Sirene + Auto reinigen + Aufrichten'],
+ file:'VehicleTuningMod.zip',
+ steps:['Script Hook V + SHVDN Nightly + NativeUI installieren','VehicleTuningMod.zip → VehicleTuningMod.cs in scripts Ordner','GTA V starten → In Auto einsteigen → Strg+V']},
+
+{cat:'vehicle',svg:svgG('💨','Super Speed','#0a0806','#151008',false),badge:'free',title:'Super Speed',sub:'Laufgeschwindigkeit · Fahrzeug-Boost',key:'Strg+S',
+ desc:'Bis zu 10x Laufgeschwindigkeit zu Fuß und einmaliger Fahrzeug-Boost.',
+ features:['Laufgeschwindigkeit: 2x/3x/5x/10x','Einmaliger Fahrzeug-Boost','Fahrzeug Max-Speed auf Maximum','Per Checkbox dauerhaft'],
+ file:'SuperSpeedMod.zip',
+ steps:['Script Hook V + SHVDN Nightly + NativeUI installieren','SuperSpeedMod.zip → SuperSpeedMod.cs in scripts Ordner','GTA V starten → Strg+S']},
+
+// ── WORLD ──
+{cat:'world',svg:svgG('🌩','Wetter & Zeit','#040808','#080f0f',false),badge:'free',title:'Wetter & Zeit',sub:'12 Wetter-Typen · Uhrzeit · Zeitlupe',key:'F10',
+ desc:'12 Wetter-Typen, 7 Uhrzeiten, Zeit einfrieren und 4 Zeitlupe-Stufen.',
+ features:['12 Wetter-Typen (Sonnig bis Blizzard)','7 Uhrzeiten wählbar','Zeit einfrieren','Zeitlupe: 0.5x / 0.3x / 0.1x / 0.05x'],
+ file:'WeatherTimeMod.zip',
+ steps:['Script Hook V + SHVDN Nightly + NativeUI installieren','WeatherTimeMod.zip → WeatherTimeMod.cs in scripts Ordner','GTA V starten → F10']},
+
+{cat:'world',svg:svgG('⏱','Zeitlupe & Matrix','#050508','#0a0a12',false),badge:'new',title:'Zeitlupe & Matrix',sub:'Slow Motion · Matrix-Effekt',key:'Strg+L',
+ desc:'Verlangsame die Spielwelt bis zum extremen Matrix-Modus (0.05x).',
+ features:['4 Stufen: 0.5x / 0.3x / 0.1x / Matrix (0.05x)','Dauerhaft per Checkbox','3-Sekunden Einmal-Zeitlupe','Normale Zeit sofort wiederherstellen'],
+ file:'SlowMotionMod.zip',
+ steps:['Script Hook V + SHVDN Nightly + NativeUI installieren','SlowMotionMod.zip → SlowMotionMod.cs in scripts Ordner','GTA V starten → Strg+L']},
+
+{cat:'world',svg:svgG('🏢','Interior Explorer','#080a04','#101408',false),badge:'new',title:'Interior Explorer',sub:'Gebäude · Innenräume · Teleport',key:'F8',
+ desc:'Betrete alle versteckten Innenräume von GTA V. Restaurants, Clubs, Polizeistationen, Banken, Gangster-Stützpunkte.',
+ features:['Shops: Burger Shot, 24/7, Fleeca Bank, Tattoo, Ammunation','Clubs: Bahama Mamas, Tequi-La-La, Vanilla Unicorn','Behörden: LSPD, Krankenhaus, Rathaus, FIB, IAA','Kriminell: Paleto Bank, Mazda Tresor, Lost MC Clubhouse','Zurück nach draußen teleportieren'],
+ file:'InteriorExplorer.zip',
+ steps:['Script Hook V + SHVDN Nightly + NativeUI installieren','InteriorExplorer.zip → InteriorExplorer.cs in scripts Ordner','GTA V starten → F8 → Kategorie → Ort wählen']},
+
+{cat:'world',svg:svgG('🌀','Teleport Manager','#050410','#0a0818',false),badge:'free',title:'Teleport Manager',sub:'Wegpunkt · Orte · Gespeicherte Plätze',key:'Strg+T',
+ desc:'Teleportiere sofort zu jedem Ort. Wegpunkt, 8 vordefinierte Orte oder eigene gespeicherte Plätze.',
+ features:['Zum Karten-Wegpunkt teleportieren','8 Orte: Airport, Mount Chiliad, Fort Zancudo, Hafen...','Eigene Orte speichern','Bodenprüfung vor Teleport'],
+ file:'TeleportMod.zip',
+ steps:['Script Hook V + SHVDN Nightly + NativeUI installieren','TeleportMod.zip → TeleportMod.cs in scripts Ordner','GTA V starten → Strg+T']},
+
+// ── PLAYER ──
+{cat:'player',svg:svgG('💪','Spieler Stats','#0a0a04','#151508',false),badge:'free',title:'Spieler Stats',sub:'Gottmodus · Fähigkeiten · Effekte',key:'Strg+F',
+ desc:'Verbessere alle Spieler-Fähigkeiten. Gottmodus, Super-Sprung, Feuerfest, kein Ragdoll, unsichtbar.',
+ features:['Sofort heilen (Leben + Rüstung)','Gottmodus (unverwundbar)','Super-Sprung','Feuerfest (kein Feuerschaden)','Kein Ragdoll (nicht umfallen)','Unsichtbar für NPCs'],
+ file:'PlayerStatsMod.zip',
+ steps:['Script Hook V + SHVDN Nightly + NativeUI installieren','PlayerStatsMod.zip → PlayerStatsMod.cs in scripts Ordner','GTA V starten → Strg+F']},
+
+{cat:'player',svg:svgG('💰','Geld & Stats','#040a04','#081508',false),badge:'free',title:'Geld & Stats',sub:'Geld · Gottmodus · Super-Sprung',key:'Strg+M',
+ desc:'Geld hinzufügen in 5 Stufen, Gottmodus, Leben auffüllen, Super-Sprung. Nur Story Mode!',
+ features:['Geld: $10k / $50k / $100k / $500k / $1M','Gottmodus für Spieler','Leben & Rüstung auffüllen','Super-Sprung + Unendlich Atem unter Wasser'],
+ file:'MoneyStatsMod.zip',
+ steps:['Script Hook V + SHVDN Nightly + NativeUI installieren','MoneyStatsMod.zip → MoneyStatsMod.cs in scripts Ordner','GTA V starten → Strg+M → NUR Story Mode!']},
+
+{cat:'player',svg:svgG('👻','NoClip & Fliegen','#040608','#080a10',false),badge:'free',title:'NoClip & Fliegen',sub:'Durch Wände · Kollision aus',key:'Strg+N',
+ desc:'Deaktiviere Kollision und fliege durch alles hindurch. 4 Geschwindigkeitsstufen.',
+ features:['Kollision vollständig deaktivieren','Fluggeschwindigkeit: 1x/2x/5x/10x','Normale Bewegungstasten','Sofort ein/ausschaltbar'],
+ file:'NoClipMod.zip',
+ steps:['Script Hook V + SHVDN Nightly + NativeUI installieren','NoClipMod.zip → NoClipMod.cs in scripts Ordner','GTA V starten → Strg+N → Checkbox aktivieren → fliegen!']},
+
+{cat:'player',svg:svgG('⭐','Wanted Kontrolle','#0a0404','#150808',false),badge:'free',title:'Wanted Kontrolle',sub:'Polizei-Sterne · Never Wanted',key:'F11',
+ desc:'Volle Kontrolle über Wanted Level. Never Wanted, sofort löschen oder 0–5 Sterne setzen.',
+ features:['Wanted Level 0–5 Sterne setzen','Never Wanted Modus (dauerhaft)','Sofortiges Löschen','Funktioniert nach Missionen'],
+ file:'WantedMod.zip',
+ steps:['Script Hook V + SHVDN Nightly + NativeUI installieren','WantedMod.zip → WantedMod.cs in scripts Ordner','GTA V starten → F11']},
+
+{cat:'player',svg:svgG('🚕','Roleplay Mod','#080806','#10100a',false),badge:'free',title:'Roleplay Mod',sub:'Taxi · Lieferfahrer · Busfahrer',key:'Strg+R',
+ desc:'Spiele verschiedene zivile Jobs. Taxi-Fahrer, Lieferfahrer oder Busfahrer für echtes Spielgeld.',
+ features:['Taxi-Modus: NPCs einsteigen lassen','Lieferfahrer: $500–$2000 Belohnung','Busfahrer: Passagiere durch die Stadt','Verdienst-Tracker'],
+ file:'RoleplayMod.zip',
+ steps:['Script Hook V + SHVDN Nightly + NativeUI installieren','RoleplayMod.zip → RoleplayMod.cs in scripts Ordner','GTA V starten → Strg+R → Job wählen']},
+
+{cat:'player',svg:svgG('🚓','Polizei Simulator','#040408','#08080f',true),badge:'new',title:'Polizei Simulator',sub:'Streife · Verhaftungen · Straßensperren',key:'Strg+P',
+ desc:'Spiele als Polizeibeamter. Im-Dienst-Modus, NPCs verhaften, Straßensperren und Verstärkung anfordern.',
+ features:['Im Dienst: kein Wanted Level','NPCs verhaften','Straßensperre mit Polizeifahrzeugen','4 Cops als Verstärkung','Verdächtigen markieren'],
+ file:'PoliceMod.zip',
+ steps:['Script Hook V + SHVDN Nightly + NativeUI installieren','PoliceMod.zip → PoliceMod.cs in scripts Ordner','GTA V starten → Strg+P → Im Dienst aktivieren']},
+];
+
+// ── RENDER ─────────────────────────────────────────────────────────────────
+function renderGrid(filter='all'){
+  const g=document.getElementById('grid');
+  g.innerHTML='';
+  const filtered=filter==='all'?mods:mods.filter(m=>m.cat===filter);
+  filtered.forEach((m,i)=>{
+    const isUlt=m.badge==='mega';
+    const bc={new:'badge-new',hot:'badge-hot',free:'badge-free',mega:'badge-mega'}[m.badge];
+    const bl={new:'NEU',hot:'HOT',free:'FREE',mega:'MEGA'}[m.badge];
+    const keyHtml=m.key.split('+').map((k,j,a)=>`<span class="key">${k.trim()}</span>${j<a.length-1?'<span class="key-sep">+</span>':''}`).join('');
+    const btnClass=isUlt?'btn-card purple':'btn-card';
+    g.innerHTML+=`
+      <div class="mod-card${isUlt?' ultimate':''}" onclick="om(${mods.indexOf(m)})">
+        <div class="mod-banner">${m.svg}</div>
+        <div class="mod-body">
+          <div class="mod-top">
+            <div class="mod-title">${m.title}</div>
+            <span class="badge ${bc}">${bl}</span>
+          </div>
+          <div class="mod-desc">${m.desc.substring(0,88)}...</div>
+          <div class="mod-req">
+            <div class="req-label">Benötigt</div>
+            <div class="req-tags">
+              <span class="req-tag tag-shv">Script Hook V</span>
+              <span class="req-tag tag-shvdn">SHVDN3</span>
+              <span class="req-tag tag-nui">NativeUI</span>
+            </div>
+          </div>
+          <div class="mod-footer">
+            <div class="key-combo">${keyHtml}</div>
+            <button class="${btnClass}" onclick="event.stopPropagation();om(${mods.indexOf(m)})">Info & ⬇</button>
+          </div>
+        </div>
+      </div>`;
+  });
+}
+
+function filterMods(cat,el){
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  el.classList.add('active');
+  renderGrid(cat);
+}
+
+// ── MODAL ──────────────────────────────────────────────────────────────────
+function dlB(d,idx,local,url){
+  return`<div class="dl-item">
+    <div class="dl-num">${idx+1}</div>
+    <div class="dl-info">
+      <div class="dl-name">${d.name}</div>
+      <div class="dl-desc">${d.desc}</div>
+      <div class="dl-row"><span class="dl-lbl">📁 Wohin:</span><span class="dl-path">${d.path}</span></div>
+      <div class="dl-files">Welche Dateien: <strong>${d.files}</strong></div>
+      ${local
+        ?`<a href="${url}" download class="btn-card" style="font-size:11px;padding:7px 14px;">⬇ Herunterladen</a>`
+        :`<a href="${d.url}" target="_blank" class="btn-ext">🔗 Zur Download-Seite</a>`}
+    </div>
+  </div>`;
+}
+
+function om(i){
+  const m=mods[i];
+  const modDL={name:m.title,desc:'Der Mod selbst – .cs Datei in den scripts Ordner legen.',path:'scripts Ordner → GTA V Hauptordner\\scripts\\',files:m.file.replace('.zip','.cs')};
+  const dlHTML=[dlB(SHV,0,false,''),dlB(SHVDN,1,false,''),dlB(NUI,2,false,''),dlB(modDL,3,true,m.file)].join('');
+  const stepsHTML=m.steps.map((s,j)=>`<div class="step-item"><div class="step-n">${j+1}</div><div class="step-t">${s}</div></div>`).join('');
+  const featHTML=m.features.map(f=>`<li>${f}</li>`).join('');
+  const keyHtml=m.key.split('+').map((k,j,a)=>`<span class="key" style="font-size:12px;padding:3px 10px;">${k.trim()}</span>${j<a.length-1?'<span class="key-sep" style="font-size:12px;">+</span>':''}`).join('');
+
+  document.getElementById('mb').innerHTML=`
+    <div class="modal-banner">${m.svg}</div>
+    <h2>${m.title}</h2>
+    <span class="modal-sub">${m.sub}</span>
+    <p class="modal-desc">${m.desc}</p>
+    <div class="warn-box">⚠️ <strong>Nur Story Mode!</strong> Niemals in GTA Online – Rockstar bannt Accounts dauerhaft. BattlEye muss deaktiviert sein.</div>
+    <div class="m-sec"><div class="m-title">Downloads – in dieser Reihenfolge</div>${dlHTML}</div>
+    <div class="m-sec"><div class="m-title">Schritt-für-Schritt Anleitung</div>${stepsHTML}</div>
+    <div class="m-sec"><div class="m-title">Features</div><ul class="feat-list">${featHTML}</ul></div>
+    <div class="modal-foot">
+      <div class="key-info"><strong>Öffnen im Spiel:</strong> ${keyHtml}</div>
+      <a href="${m.file}" download class="btn-download">⬇ Mod herunterladen</a>
+    </div>`;
+  document.getElementById('overlay').classList.add('open');
+  document.querySelector('#overlay .modal').scrollTop=0;
+}
+function cl(){document.getElementById('overlay').classList.remove('open');}
+function cm(e){if(e.target===document.getElementById('overlay'))cl();}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')cl();});
+renderGrid();
+</script>
+</body>
+</html>
